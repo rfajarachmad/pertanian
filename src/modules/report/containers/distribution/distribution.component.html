@@ -1,0 +1,30 @@
+<sb-layout-dashboard>
+    <sb-dashboard-head title="Peta Sebaran" [hideBreadcrumbs]="false"></sb-dashboard-head>
+
+    <sb-card>
+        <div class="card-header">
+            <fa-icon class="mr-1" [icon]='["fas", "table"]'></fa-icon>Peta Sebaran
+        </div>
+        <div class="card-body">
+            <google-map 
+            [center]='center' 
+            [zoom]='zoom' 
+            [height]='height'
+            [width]='width'>
+            <map-marker
+                #somemarker="mapMarker"
+                *ngFor="let marker of markers"
+                [position]="marker.position"
+                [options]="marker.options"
+                (mapClick)="openInfo(somemarker, marker.info)"
+            >
+            </map-marker>
+
+            <map-info-window >
+                <div #htmlContainer></div>
+            </map-info-window>
+
+        </google-map>
+        </div>
+    </sb-card>
+</sb-layout-dashboard>

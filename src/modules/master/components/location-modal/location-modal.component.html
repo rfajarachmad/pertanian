@@ -1,0 +1,56 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Tambah lokasi baru</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="myForm" (ngSubmit)="submitForm()">
+      <div class="modal-body">
+        <div class="container">
+          
+            <div class="form-group">
+                <label for="province">Provinsi</label>
+                <select class="form-control" formControlName="province_id" (change)="changeProvince($event)">
+                <option *ngFor="let item of provinces" value="{{item.id}}">{{item.name}}</option>
+                </select>
+            </div>
+              <div class="form-group">
+                <label for="city">Kota/Kab</label>
+                <select class="form-control" formControlName="city_id" (change)="changeCity($event)">
+                    <option *ngFor="let item of cities" value="{{item.id}}">{{item.name}}</option>
+                    </select>
+              </div>
+              <div class="form-group">
+                <label for="district">Kecamatan</label>
+                <select class="form-control" formControlName="district_id" (change)="changeDistrict($event)">
+                    <option *ngFor="let item of districts" value="{{item.id}}">{{item.name}}</option>
+                    </select>
+              </div>
+              <div class="form-group">
+                <label for="sub_district">Desa/Kelurahan</label>
+                <select class="form-control" formControlName="sub_district_id">
+                    <option *ngFor="let item of sub_districts" value="{{item.id}}">{{item.name}}</option>
+                    </select>
+              </div>
+              <div class="form-group">
+                <label for="land_area">Luas (ha)</label>
+                <input class="form-control" type="text" formControlName="land_area">
+              </div>
+              <div class="form-group">
+                <label for="year">Tahun Berlaku</label>
+                <select class="form-control" formControlName="year">
+                    <option value="2020">2020</option>
+                    <option value="2019">2019</option>
+                    </select>
+              </div>
+          </div>
+        
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" (click)="submitForm()" [disabled]="!myForm.valid">
+          Simpan
+        </button>
+      </div>
+    </form>
+  </div>

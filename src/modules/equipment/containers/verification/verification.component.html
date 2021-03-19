@@ -1,0 +1,49 @@
+<sb-layout-dashboard>
+    <sb-dashboard-head title="Verifikasi Alsintan" [hideBreadcrumbs]="false"></sb-dashboard-head>
+
+    <sb-card>
+        <div class="card-header">
+            <fa-icon class="mr-1" [icon]='["fas", "table"]'></fa-icon>Data yang memerlukan verifikasi pengawas
+        </div>
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">No Reg</th>
+                <th scope="col">Lokasi</th>
+                <th scope="col">Jenis Alat</th>
+                <th scope="col">Tahun</th>
+                <th scope="col">Asal Perolehan</th>
+                <th scope="col">Nama Pemilik</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of items">
+                <td>{{ item.reg_no }}</td>
+                <td>{{ item.province }}-{{ item.city }}
+                  <br>{{ item.district }}-{{ item.sub_district }}
+                  <br>{{ item.loc_addr_detail}}
+                </td>
+                <td>{{ item.type }}</td>
+                <td>{{ item.year }}</td>
+                <td>{{ item.funding }}</td>
+                <td>{{ item.owner }}</td>
+                <td>{{ item.status }}</td>
+                <td>
+                  <div class="row">
+                    <div class="col">
+                      <button type="button" class="btn btn-link" (click)="detail( item )">Verifikasi</button>
+                    </div>
+                    <div class="col" *ngIf="role === 'ADMIN'">
+                      <button type="button" class="btn btn-link" (click)="delete( item )">Delete</button>
+                     </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </sb-card>
+</sb-layout-dashboard>

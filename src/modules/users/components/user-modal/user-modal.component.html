@@ -1,0 +1,54 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Tambah pengguna baru</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="myForm" (ngSubmit)="submitForm()">
+      <div class="modal-body">
+        <div class="container">
+          
+            <div class="form-group">
+                <label for="name">Nama</label>
+                <input class="form-control" type="text" formControlName="name">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input class="form-control" type="text" formControlName="email">
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input class="form-control" type="password" formControlName="password">
+              </div>
+              <div class="form-group">
+                <label for="email">Confirm Password</label>
+                <input class="form-control" type="password" formControlName="confirm_password">
+              </div>
+              <div class="form-group">
+                <label for="role">Akses</label>
+                <select class="form-control" formControlName="role">
+                  <option value="PENYULUH">Penyuluh</option>
+                  <option value="PENGAWAS">Pengawas</option>
+                  <option value="ADMIN">Admin</option>
+                </select>
+              </div>
+              <div *ngIf="data">  
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select class="form-control" formControlName="status">
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                    </select>
+                </div>
+              </div>
+          </div>
+        
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" (click)="submitForm()" [disabled]="!myForm.valid">
+          Simpan
+        </button>
+      </div>
+    </form>
+  </div>

@@ -1,0 +1,58 @@
+<sb-layout-dashboard>
+    <sb-dashboard-head title="Status Pengajuan" [hideBreadcrumbs]="false"></sb-dashboard-head>
+
+    <!-- <sb-card
+                ><div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "chart-pie"]'></fa-icon>Prosentase Status Pengajuan</div>
+                <div class="card-body"><canvas #myPieChart></canvas>
+                </div>
+                </sb-card> -->
+
+                <div class="row">
+                    <div class="col">
+                      <div ngbDropdown class="d-inline-block">
+                        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{ selectedStatus }}</button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                          <button ngbDropdownItem (click)="search('Menunggu Verifikasi')">Menunggu Verifikasi</button>
+                          <button ngbDropdownItem (click)="search('Terverifikasi')">Terverifikasi</button>
+                          <button ngbDropdownItem (click)="search('Ditolak')">Ditolak</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+    <sb-card>
+
+        <div class="card-header">
+            <fa-icon class="mr-1" [icon]='["fas", "table"]'></fa-icon>Daftar Pengajuan
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">No Reg</th>
+                    <th scope="col">Lokasi</th>
+                    <th scope="col">Jenis Alat</th>
+                    <th scope="col">Tahun</th>
+                    <th scope="col">Asal Perolehan</th>
+                    <th scope="col">Nama Pemilik</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of items">
+                    <td>{{ item.reg_no }}</td>
+                    <td>{{ item.province }}-{{ item.city }}
+                      <br>{{ item.district }}-{{ item.sub_district }}
+                      <br>{{ item.loc_addr_detail}}
+                    </td>
+                    <td>{{ item.type }}</td>
+                    <td>{{ item.year }}</td>
+                    <td>{{ item.funding }}</td>
+                    <td>{{ item.owner }}</td>
+                    <td>{{ item.status }}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </sb-card>
+</sb-layout-dashboard>

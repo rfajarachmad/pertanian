@@ -18,10 +18,12 @@ export interface SideNavItem {
     icon?: string;
     text: string;
     link?: string;
+    roles?: string[];
     submenu?: SideNavItem[];
 }
 
 export interface SideNavSection {
     text?: string;
+    roles?: string[];
     items: string[];
 }

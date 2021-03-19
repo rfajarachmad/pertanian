@@ -1,1 +1,8 @@
 @import 'styles/variables.scss';
+
+
+.bg-image-header {
+    background-image: url("../../../../assets/img/header.jpeg");
+    background-repeat: no-repeat;
+    background-size: 100% 60px;
+}

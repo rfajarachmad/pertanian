@@ -1,0 +1,156 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title" *ngIf="source === 'entry'">Tambah data baru</h4>
+  <h4 class="modal-title" id="modal-basic-title" *ngIf="source === 'verification'">Verifikasi kepemilikan</h4>
+  <h4 class="modal-title" id="modal-basic-title" *ngIf="source === 'read-only'">Detail Kepemilikan</h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="myForm" (ngSubmit)="submitForm()">
+    <div class="modal-body">
+      <div class="container">
+        <div class="row">
+          <div class="col-4">
+            <div class="row">
+              <div class="form-group">
+                <label for="province_id">Provinsi</label>
+                <select class="form-control" formControlName="province_id" (change)="changeProvince($event)">
+                <option *ngFor="let item of provinces" value="{{item.id}}">{{item.name}}</option>
+                </select>
+            </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label for="city_id">Kota/Kab</label>
+                <select class="form-control" formControlName="city_id" (change)="changeCity($event)">
+                    <option *ngFor="let item of cities" value="{{item.id}}">{{item.name}}</option>
+                    </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label for="district_id">Kecamatan</label>
+                <select class="form-control" formControlName="district_id" (change)="changeDistrict($event)">
+                    <option *ngFor="let item of districts" value="{{item.id}}">{{item.name}}</option>
+                    </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label for="sub_district_id">Desa/Kelurahan</label>
+                <select class="form-control" formControlName="sub_district_id">
+                    <option *ngFor="let item of sub_districts" value="{{item.id}}">{{item.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label for="loc_addr_detail">Alamat lengkap</label>
+                <input class="form-control" type="text" formControlName="loc_addr_detail">
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="row">
+              <div class="form-group">
+                <label for="type">Nomor Registrasi</label>
+                <input class="form-control" type="text" disabled formControlName="reg_no">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label for="type_id">Jenis Alsintan</label>
+                <select class="form-control" formControlName="type_id">
+                  <option *ngFor="let item of types" value="{{item.code}}">{{item.name}}</option>
+              </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label for="year">Tahun Perolehan</label>
+                <select class="form-control" formControlName="year">
+                  <option *ngFor="let item of years" value="{{item}}">{{item}}</option>
+              </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label for="funding_id">Cara Perolehan</label>
+                <select class="form-control" formControlName="funding_id">
+                  <option *ngFor="let item of fundings" value="{{item.code}}">{{item.name}}</option>
+              </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label for="type">Kondisi</label>
+                <select class="form-control" formControlName="condition">
+                  <option value="Layak Pake">Layak Pake</option>
+                  <option value="Rusak Ringan">Rusak Ringan</option>
+                  <option value="Rusak Berat">Rusak Berat</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="row">
+              <div class="form-group">
+                <label for="location">Nama Pemilik</label>
+                <input class="form-control" type="text" formControlName="owner">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label for="type">Status Kepemilikan</label>
+                <select class="form-control" formControlName="ownership">
+                  <option value="Perorangan">Perorangan</option>
+                  <option value="Kelompok">Kelompok</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label for="land_area">Luas Garapan(ha)</label>
+                <input class="form-control" type="text" formControlName="land_area">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label for="note">Test Report</label>
+                <select class="form-control" formControlName="note">
+                  <option value="Ada">Ada</option>
+                  <option value="Tidak Ada">Tidak Ada</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label *ngIf="source === 'entry'" for="report">Validasi</label>
+                <input *ngIf="source === 'entry'" class="form-control" type="file"  (change)="onFileChange($event)">
+                <a *ngIf="source === 'verification' || source === 'read-only'" href="{{report_url}}" target="_blank">Download Validasi</a>
+              </div>
+            </div>
+            <div class="row" *ngIf="source === 'verification'">
+                <div class="form-group">
+                  <label for="location">Dibuat Oleh</label>
+                  <input class="form-control" type="text" disabled formControlName="createdByName">
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-success" *ngIf="source === 'entry'" (click)="submitForm()" [disabled]="!myForm.valid">
+        Simpan dan Kirim
+      </button>
+      <button class="btn btn-success" *ngIf="source === 'verification'" (click)="verify()" [disabled]="!myForm.valid">
+        Setujui
+      </button>
+      <button class="btn btn-warning" *ngIf="source === 'verification'" (click)="reject()" [disabled]="!myForm.valid">
+        Tolak
+      </button>
+    </div>
+  </form>
+</div>

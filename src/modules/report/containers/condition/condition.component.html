@@ -1,0 +1,116 @@
+<sb-layout-dashboard>
+    <sb-dashboard-head title="Kondisi Alsintan" [hideBreadcrumbs]="false"></sb-dashboard-head>
+    <sb-card>
+      <div class="card-header">
+          <fa-icon class="mr-1" [icon]='["fas", "search"]'></fa-icon>Kriteria Pencarian
+      </div>
+      <div class="card-body">
+        <form [formGroup]="myForm" (ngSubmit)="submitForm()">
+            <div class="row">
+            <div class="col-4">
+            <div class="row">
+              <div class="form-group">
+                <label for="province_id">Provinsi</label>
+                <select class="form-control" formControlName="province_id" (change)="changeProvince($event)">
+                <option *ngFor="let item of provinces" value="{{item.id}}">{{item.name}}</option>
+                </select>
+            </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label for="city_id">Kota/Kab</label>
+                <select class="form-control" formControlName="city_id" (change)="changeCity($event)">
+                    <option *ngFor="let item of cities" value="{{item.id}}">{{item.name}}</option>
+                    </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label for="district_id">Kecamatan</label>
+                <select class="form-control" formControlName="district_id" (change)="changeDistrict($event)">
+                    <option *ngFor="let item of districts" value="{{item.id}}">{{item.name}}</option>
+                    </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label for="sub_district_id">Desa/Kelurahan</label>
+                <select class="form-control" formControlName="sub_district_id">
+                    <option *ngFor="let item of sub_districts" value="{{item.id}}">{{item.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="row">
+              <div class="form-group">
+                <label for="type_id">Jenis Alsintan</label>
+                <select class="form-control" formControlName="type_id">
+                  <option *ngFor="let item of types" value="{{item.code}}">{{item.name}}</option>
+              </select>
+              </div>
+            </div>
+            <!-- <div class="row">
+              <div class="form-group">
+                <label for="funding_id">Cara Perolehan</label>
+                <select class="form-control" formControlName="funding_id">
+                  <option *ngFor="let item of fundings" value="{{item.code}}">{{item.name}}</option>
+              </select>
+              </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                  <label for="year">Tahun Perolehan</label>
+                  <select class="form-control" formControlName="year">
+                    <option *ngFor="let item of years" value="{{item}}">{{item}}</option>
+                </select>
+                </div>
+              </div> -->
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <button class="btn btn-success" style="margin-right: 10px;" (click)="submitForm()">
+          Cari
+        </button>
+        <button class="btn btn-primary" (click)="resetForm()">
+          Reset
+        </button>
+      </div>
+      </div>
+    </sb-card>
+
+    <sb-card>
+        <div class="card-header">
+            <fa-icon class="mr-1" [icon]='["fas", "table"]'></fa-icon>Daftar alsintan berdasarkan cara perolehan
+        </div>
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Lokasi</th>
+                <th scope="col">Jenis Alat</th>
+                <!-- <th scope="col">Cara Perolehan</th>
+                <th scope="col">Tahun</th> -->
+                <th scope="col">Layak Pake</th>
+                <th scope="col">Rusak Ringan</th>
+                <th scope="col">Rusak Berat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of items">
+                <td>{{ item.province }}-{{ item.city }}
+                  <br>{{ item.district }}-{{ item.sub_district }}
+                </td>
+                <td>{{ item.type }}</td>
+                <!-- <td>{{ item.funding }}</td>
+                <td>{{ item.year }}</td> -->
+                <td>{{ item.total_operational }}</td>
+                <td>{{ item.total_broken }}</td>
+                <td>{{ item.total_damage }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </sb-card>
+</sb-layout-dashboard>

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { AuthService } from '@modules/auth/services';
 import { SBRouteData, SideNavItem } from '@modules/navigation/models';
 
 @Component({
@@ -6,6 +7,7 @@ import { SBRouteData, SideNavItem } from '@modules/navigation/models';
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './side-nav-item.component.html',
     styleUrls: ['side-nav-item.component.scss'],
+    providers: [AuthService],
 })
 export class SideNavItemComponent implements OnInit {
     @Input() sideNavItem!: SideNavItem;
@@ -14,6 +16,11 @@ export class SideNavItemComponent implements OnInit {
     expanded = false;
     routeData!: SBRouteData;
 
-    constructor() {}
-    ngOnInit() {}
+    role = '';
+
+    constructor(public authService: AuthService) {}
+    ngOnInit() {
+        const login = this.authService.getLoginUser();
+        this.role = login.role;
+    }
 }

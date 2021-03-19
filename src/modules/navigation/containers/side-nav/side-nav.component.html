@@ -1,14 +1,14 @@
-<nav class="sb-sidenav accordion" id="sidenavAccordion" [ngClass]="sidenavStyle">
+<nav class="sb-sidenav accordion" style="background-image: url(../../../../assets/img/side.jpeg); background-size: cover;" id="sidenavAccordion" [ngClass]="sidenavStyle">
     <div class="sb-sidenav-menu">
         <div class="nav">
             <ng-container *ngFor="let section of sideNavSections"
-                ><div class="sb-sidenav-menu-heading" *ngIf="section.text">{{ section.text }}</div>
+                ><div class="sb-sidenav-menu-heading" style="color: white"  *ngIf="section.text && section.roles && section.roles.includes(role)">{{ section.text }}</div>
                 <ng-container *ngFor="let item of section.items"><sb-side-nav-item [sideNavItem]="sideNavItems[item]"></sb-side-nav-item></ng-container
             ></ng-container>
         </div>
     </div>
-    <div class="sb-sidenav-footer">
+    <div class="sb-sidenav-footer" style="background-image: url(../../../../assets/img/side.jpeg); background-size: cover;">
         <div class="small">Logged in as:</div>
-        <span *ngIf="userService.user$ | async as user">{{user.firstName}} {{user.lastName}}</span>
+        <span *ngIf="login">{{login.name}}</span>
     </div>
 </nav>

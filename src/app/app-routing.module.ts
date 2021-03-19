@@ -5,7 +5,7 @@ const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        redirectTo: '/dashboard',
+        redirectTo: '/submissions',
     },
     {
         path: 'charts',
@@ -38,6 +38,28 @@ const routes: Routes = [
         path: 'version',
         loadChildren: () =>
             import('modules/utility/utility-routing.module').then(m => m.UtilityRoutingModule),
+    },
+    {
+        path: 'submissions',
+        loadChildren: () =>
+            import('modules/equipment/equipment-routing.module').then(
+                m => m.EquipmentRoutingModule
+            ),
+    },
+    {
+        path: 'reports',
+        loadChildren: () =>
+            import('modules/report/report-routing.module').then(m => m.ReportRoutingModule),
+    },
+    {
+        path: 'admin/master',
+        loadChildren: () =>
+            import('modules/master/master-routing.module').then(m => m.MasterRoutingModule),
+    },
+    {
+        path: 'admin/users',
+        loadChildren: () =>
+            import('modules/users/users-routing.module').then(m => m.UsersRoutingModule),
     },
     {
         path: '**',
